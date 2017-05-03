@@ -9,7 +9,6 @@ services:
       - SWARM_TASK_SLOT={{.Task.Slot}}
       - SWARM_SERVICE_NAME={{.Service.Name}}
     deploy:
-      # Only one master for now
       replicas: 3
       resources:
         limits:
