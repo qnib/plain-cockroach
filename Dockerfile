@@ -10,4 +10,5 @@ COPY opt/qnib/cockroach/bin/start.sh \
      /opt/qnib/cockroach/bin/
 HEALTHCHECK --interval=5s --retries=5 --timeout=1s \
    CMD /opt/qnib/cockroach/bin/healthcheck.sh
+VOLUME ["/cockroach-data/"]
 CMD ["/opt/qnib/cockroach/bin/start.sh"]
