@@ -1,13 +1,15 @@
 version: '3'
 services:
   node:
-    image: qnib/plain-cockroach:local3
+    image: qnib/plain-cockroach:local22
     ports:
       - "26257:26257"
       - "8080:8080"
     environment:
       - SWARM_TASK_SLOT={{.Task.Slot}}
       - SWARM_SERVICE_NAME={{.Service.Name}}
+    volumes:
+      - ./resources/client.ckniep.key:/opt/cockroach/certs/client.qnib.key
     deploy:
       replicas: 1
       resources:

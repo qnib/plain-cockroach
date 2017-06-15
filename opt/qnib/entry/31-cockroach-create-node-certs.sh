@@ -6,7 +6,7 @@ if [[ ! -f /opt/cockroach/ca/ca.key ]];then
 fi
 
 if [[ ! -f /opt/cockroach/certs/node.crt ]];then
-  cockroach cert create-node localhost cockroach_node tasks.node $(hostname) \
-                 --certs-dir=/opt/cockroach/certs/ \
-                 --ca-key=/opt/cockroach/ca/ca.key
+  gosu cockroach cockroach cert create-node localhost cockroach_node tasks.node $(hostname) \
+                            --certs-dir=/opt/cockroach/certs/ \
+                            --ca-key=/opt/cockroach/ca/ca.key
 fi

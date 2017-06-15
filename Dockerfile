@@ -12,8 +12,11 @@ HEALTHCHECK --interval=5s --retries=5 --timeout=1s \
    CMD /opt/qnib/cockroach/bin/healthcheck.sh
 VOLUME ["/cockroach-data/"]
 CMD ["/opt/qnib/cockroach/bin/start.sh"]
+RUN useradd --shell /bin/bash cockroach
 RUN mkdir -p /opt/cockroach/ca /opt/cockroach/certs \
- && cockroach cert create-ca --certs-dir=/opt/cockroach/certs/ --ca-key=/opt/cockroach/ca/ca.key
+ && cockroach cert create-ca --certs-dir=/opt/cockroach/certs/ --ca-key=/opt/cockroach/ca/ca.key \
+ && chown -R cockroach:  /opt/cockroach/certs/ /opt/cockroach/ca
 ENV COCKROACH_USERS=root,maxroach \
-    ENTRYPOINTS_DIR=/opt/qnib/entry/
-COPY /opt/qnib/entry/* /opt/qnib/entry/
+    ENTRYPOINTS_DIR=/opt/qnib/entry/ \
+    ENTRY_USER=cockroach
+COPY ./opt/qnib/entry/*.sh /opt/qnib/entry/

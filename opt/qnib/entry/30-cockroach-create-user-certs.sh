@@ -6,6 +6,6 @@ if [[ ! -f /opt/cockroach/ca/ca.key ]];then
 fi
 for user in $(echo ${COCKROACH_USERS} |sed -e 's/,/ /g');do
   if [[ ! -f /opt/cockroach/certs/client.${user}.crt ]];then
-    cockroach cert create-client ${user} --certs-dir=/opt/cockroach/certs/ --ca-key=/opt/cockroach/ca/ca.key
+    gosu cockroach cockroach cert create-client ${user} --certs-dir=/opt/cockroach/certs/ --ca-key=/opt/cockroach/ca/ca.key
   fi
 done
