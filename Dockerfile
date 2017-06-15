@@ -14,6 +14,6 @@ VOLUME ["/cockroach-data/"]
 CMD ["/opt/qnib/cockroach/bin/start.sh"]
 RUN mkdir -p /opt/cockroach/ca /opt/cockroach/certs \
  && cockroach cert create-ca --certs-dir=/opt/cockroach/certs/ --ca-key=/opt/cockroach/ca/ca.key
-ENV COCKROACH_USERS=maxroach \
+ENV COCKROACH_USERS=root,maxroach \
     ENTRYPOINTS_DIR=/opt/qnib/entry/
-COPY /opt/qnib/entry/*.sh /opt/qnib/entry/
+COPY /opt/qnib/entry/* /opt/qnib/entry/
